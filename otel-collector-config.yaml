@@ -1,0 +1,48 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  resource:
+    attributes:
+    - key: appdynamics.controller.account
+      action: upsert
+      value: "devnet"
+    - key: appdynamics.controller.host
+      action: upsert
+      value: "devnet.saas.appdynamics.com"
+    - key: appdynamics.controller.port
+      action: upsert
+      value: 443
+    - key: service.namespace
+      action: insert
+      value: "default" # <--- Replace the value of "default" with: DEVWKS-2025-<your student number>
+
+  batch:
+    timeout: 30s
+    send_batch_size: 90
+
+exporters:
+  otlphttp:
+    endpoint: "https://pdx-sls-agent-api.saas.appdynamics.com"
+    headers: {"x-api-key": "ENTER-APPDYNAMICS-OTEL-API-KEY-HERE"}
+  jaeger:
+    endpoint: "jaeger:14250"
+    tls:
+      insecure: true
+  logging:
+    loglevel: debug
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [otlphttp,logging,jaeger]
+  telemetry:
+    logs:
+      level: "DEBUG"
