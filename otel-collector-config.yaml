@@ -29,7 +29,7 @@ processors:
 exporters:
   otlphttp:
     endpoint: "https://pdx-sls-agent-api.saas.appdynamics.com"
-    headers: {"x-api-key": "ENTER-APPDYNAMICS-OTEL-API-KEY-HERE"}
+    headers: {"x-api-key": "ENTER-APPDYNAMICS-OTEL-API-KEY-HERE"} #<---- Replace the value with the AppDynamics OpenTelemetry Key
   jaeger:
     endpoint: "jaeger:14250"
     tls:

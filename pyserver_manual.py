@@ -14,7 +14,7 @@ from statistics import mean
 # Service name namespace is required for AppD
 resource = resources.Resource(attributes={
     resources.SERVICE_NAME: "pyserver_manual",
-    resources.SERVICE_NAMESPACE: "weatherapp",
+    resources.SERVICE_NAMESPACE: "DEVWKS-STUDENT-",# <--- Add your student ID here
     resources.TELEMETRY_SDK_LANGUAGE: "python",
     resources.HOST_NAME : "localhost",
     resources.TELEMETRY_SDK_NAME : "opentelemetry"
