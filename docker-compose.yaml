@@ -7,7 +7,7 @@ services:
     # Change the "source" path below to swap out collector config files!
     volumes:
       - type: bind
-        source: /home/developer/src/otel-collector-config.yaml
+        source: /home/developer/src/devwks-2025/otel-collector-config.yaml
         target: /etc/otel-collector-config.yaml
     ports:
       - "1888:1888"   # pprof extension
