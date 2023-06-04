@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Check Weather (Automatic Instrumentation) {% endblock %}</h1>
+    <p><a href="https://www.latlong.net/" target="_blank">Get city Coordinates here.</a></p>
+    <p>Examples: Las Vegas 36.169941 / -115.139832</p>
+    <form method="post">
+        <label for="title">City Coordinates</label>
+        <br>
+        Latitude: <input type="text" name="latitude"
+               placeholder="latitude"
+               value="{{ request.form['latitude'] }}"></input>
+        <br>
+
+        Longitude: <input type="text" name="longitude"
+        placeholder="longitude"
+        value="{{ request.form['longitude'] }}"></input>
+        <br>
+        <button type="submit">Check Weather</button>
+    </form>
+    
+    {% if messages is defined %}
+    <br>
+    Average Temperature Today: <b>{{ messages.temp }}</b> °C
+    {% endif %}
+{% endblock %}

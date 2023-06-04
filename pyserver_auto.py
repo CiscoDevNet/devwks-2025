@@ -18,9 +18,9 @@ def index():
         temp = get_temperature(latitude=latitude,longitude=longitude)
         messages = { "temp" : temp }
 
-        return render_template('index.html', messages=messages)
+        return render_template('index_auto.html', messages=messages)
 
-    return render_template('index.html')
+    return render_template('index_auto.html')
 
 @app.route("/checkweather")
 def checkweather():
