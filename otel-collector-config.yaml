@@ -30,8 +30,8 @@ exporters:
   otlphttp:
     endpoint: "https://pdx-sls-agent-api.saas.appdynamics.com"
     headers: {"x-api-key": "ENTER-APPDYNAMICS-OTEL-API-KEY-HERE"} #<---- Replace the value with the AppDynamics OpenTelemetry Key
-  jaeger:
-    endpoint: "jaeger:14250"
+  otlp/jaeger:
+    endpoint: "jaeger:4317"
     tls:
       insecure: true
   logging:
@@ -42,7 +42,11 @@ service:
     traces:
       receivers: [otlp]
       processors: [resource, batch]
-      exporters: [otlphttp,logging,jaeger]
+      exporters: [otlphttp,logging,otlp/jaeger]
+    metrics:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [otlphttp,logging,otlp/jaeger]
   telemetry:
     logs:
       level: "DEBUG"
